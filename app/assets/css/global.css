@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-default: "Inter", sans-serif;
+
+    --font-display: "Outfit", sans-serif;
+}
+
+body {
+    background-color: #1c1c1c;
+}

@@ -1,0 +1,39 @@
+# Node modules (dépendances du projet)
+node_modules/
+
+# Dossiers de build et de production de Nuxt
+.nuxt/
+.output/
+dist/
+generated/
+
+# Données locales et caches (comme ton dossier .data visible sur ta capture)
+.data/
+.cache/
+
+# Fichiers d'environnement (clés secrètes, Supabase tokens, etc.)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Fichiers système (Mac et Windows)
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Configuration des éditeurs (VS Code, WebStorm)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

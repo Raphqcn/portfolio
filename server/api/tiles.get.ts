@@ -1,0 +1,9 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import yaml from 'js-yaml'
+
+export default eventHandler(async (event) => {
+    const filePath = path.join(process.cwd(), 'content', 'pages', 'index', 'tiles.yml')
+    const content = fs.readFileSync(filePath, 'utf-8')
+    return yaml.load(content)
+})
