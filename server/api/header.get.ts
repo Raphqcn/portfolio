@@ -1,7 +1,9 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import yaml from 'js-yaml'
 
 export default defineEventHandler(async (event) => {
-    const content = await useStorage('assets:server:yamlContent').getItem('ui/header.yml')
-    
-    return yaml.load(content as string)
+    const filePath = path.join(process.cwd(), 'content', 'ui', 'header.yml')
+    const content = fs.readFileSync(filePath, 'utf-8')
+    return yaml.load(content)
 })
