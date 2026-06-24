@@ -28,4 +28,10 @@ export default defineNuxtConfig({
       ]
     }
   },
+  nitro: {
+    serverAssets: [{
+      baseName: 'yamlContent',
+      dir: './content'
+    }]
+  }
 })
