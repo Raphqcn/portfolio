@@ -72,7 +72,8 @@ const buttonTheme = ref(false);
           </ul>
         </nav>
 
-        <div :class="cn('flex items-center gap-4 mt-2')">
+        <div :class="cn('items-center gap-4 mt-2 hidden')">
+          <!--Hidden because WIP (flex)-->
           <button
             :class="cn('p-2 hover:bg-white/10 rounded-lg transition')"
             @click="buttonTheme = !buttonTheme"
