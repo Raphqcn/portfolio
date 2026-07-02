@@ -1,6 +1,16 @@
 import yaml from 'js-yaml'
 
 export default defineEventHandler(async (event) => {
-    const content = await useStorage('assets:server').getItem('links.yml')
-    return yaml.load(content as string)
+    const content = useStorage('assets:server')
+    const file = await content.getItem('links.yml')
+
+    if (!file) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'File not found'
+        })
+    }
+
+    const data = yaml.load(file as string)
+    return data
 })
