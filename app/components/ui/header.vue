@@ -13,7 +13,7 @@ interface HeaderConfig {
 }
 
 // Fetch header content
-const { data: config } = await useFetch<HeaderConfig>("/api/header");
+const { data: config } = await useFetch<HeaderConfig>("/api/ui/header");
 
 // Theme manager
 import { useTheme } from "~/assets/composable/useTheme";

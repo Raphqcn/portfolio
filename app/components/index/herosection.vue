@@ -3,8 +3,8 @@ import { cn } from "~/assets/cn";
 import Tiles from "./tiles.vue";
 import type { tile } from "~/types/tile.js"; //tilesData
 
-const { data: tilesData } = await useFetch<tile[]>("/api/tiles"); // Récupération du contenu des tuiles
-const { data: config } = await useFetch<Hero>("/api/hero"); // Récupération du contenu texte
+const { data: tilesData } = await useFetch<tile[]>("/api/pages/index/tiles"); // Récupération du contenu des tuiles
+const { data: config } = await useFetch<Hero>("/api/pages/index/hero"); // Récupération du contenu texte
 
 interface Hero {
   subtitle: string;
