@@ -52,7 +52,7 @@
     - ""
   link: ""
   links:
-    - url: "localmail"
+    - url: "/#contact"
       name: "Send me a mail"
       icon: "lucide:mail"
     - url: "https://www.linkedin.com/in/raphael-quinchon/"
