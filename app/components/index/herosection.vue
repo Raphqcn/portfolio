@@ -13,7 +13,7 @@ interface Hero {
 
 <template>
   <!-- Main container -->
-  <div
+  <main
     :class="
       cn(
         'relative min-h-screen md:h-screen w-full bg-gray-950 overflow-x-hidden',
@@ -74,7 +74,7 @@ interface Hero {
       </div>
 
       <!-- Tiles container -->
-      <div
+      <section
         :class="
           cn(
             'w-full flex max-lg:flex-col gap-6 justify-center max-lg:items-center',
@@ -82,7 +82,7 @@ interface Hero {
         "
       >
         <Tiles v-for="item in tilesData" :key="item.id" :tile="item" />
-      </div>
+      </section>
     </div>
-  </div>
+  </main>
 </template>
