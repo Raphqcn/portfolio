@@ -1,5 +1,6 @@
+<!-- Tiles.vue -->
+
 <script setup lang="ts">
-import { NuxtIconSvg } from "@nuxt/icon/runtime/components/svg.js";
 import { cn } from "~/assets/cn";
 import type { tile } from "~/types/tile";
 
