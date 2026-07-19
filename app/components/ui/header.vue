@@ -1,3 +1,5 @@
+<!-- Header.vue -->
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { cn } from "~/assets/cn";
@@ -72,10 +74,10 @@ const buttonTheme = ref(false);
           </ul>
         </nav>
 
-        <div :class="cn('items-center gap-4 mt-2 hidden')">
-          <!--Hidden because WIP (flex)-->
+        <div :class="cn('items-center gap-4 mt-2')">
+          <!--Hidden (hidden for WORK IN PROGRESS) (flex)-->
           <button
-            :class="cn('p-2 hover:bg-white/10 rounded-lg transition')"
+            :class="cn('hidden   p-2 hover:bg-white/10 rounded-lg transition')"
             @click="buttonTheme = !buttonTheme"
           >
             <Transition name="theme" mode="out-in">
@@ -89,12 +91,14 @@ const buttonTheme = ref(false);
 
           <button
             @click="isMenuOpen = !isMenuOpen"
-            :class="cn('md:hidden p-2 text-white')"
+            :class="cn('md:hidden p-2 text-white z-50')"
           >
             <span v-if="!isMenuOpen">
-              <Icon :size="22" name="lucide:menu" />
+              <Icon size="30" name="lucide:menu" class="text-white" />
             </span>
-            <span v-else>✕</span>
+            <span v-else>
+              <Icon size="30" name="lucide:x" class="text-white" />
+            </span>
           </button>
         </div>
       </div>
