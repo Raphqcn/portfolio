@@ -2,7 +2,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { cn } from "~/assets/cn";
 
 interface NavItem {
   name: string;

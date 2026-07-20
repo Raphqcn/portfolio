@@ -1,7 +1,6 @@
 <!-- Tiles.vue -->
 
 <script setup lang="ts">
-import { cn } from "~/assets/cn";
 import type { tile } from "~/types/tile";
 
 defineProps<{
