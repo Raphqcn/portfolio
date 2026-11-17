@@ -20,18 +20,13 @@ export default defineNuxtConfig({
   
   app: {
     head: {
-      title: 'Raphaël.Q | Développeur Full Stack',
+      htmlAttrs: { lang: 'en' },
+      title: 'Raphael.Q — Full-stack developer',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Raphaël.Q – Développeur concepteur créant des applications rapides, modernes et élégantes. Découvrez mes projets, compétences et réalisations.' }
+        { name: 'description', content: 'Raphael.Q, full-stack developer building fast web apps and tools.' }
       ]
     }
   },
-  nitro: {
-    serverAssets: [{
-      baseName: 'yamlContent',
-      dir: './content'
-    }]
-  }
 })
