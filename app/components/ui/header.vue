@@ -1,123 +1,97 @@
-<!-- Header.vue -->
-
+<!-- ui > header.vue -->
 <script setup lang="ts">
-import { ref } from "vue";
+const { data: site } = await useSite();
 
-interface NavItem {
-  name: string;
-  link: string;
-}
-
-interface HeaderConfig {
-  title: string;
-  navbuttons: NavItem[];
-}
-
-// Fetch header content
-const { data: config } = await useFetch<HeaderConfig>("/api/ui/header");
-
-// Theme manager
-import { useTheme } from "~/assets/composable/useTheme";
-
-// State
 const isMenuOpen = ref(false);
-const buttonTheme = ref(false);
+
+const links = [
+  { name: "Work", to: "/#work" },
+  { name: "Writing", to: "/#writing" },
+  { name: "About", to: "/#about" },
+  { name: "Contact", to: "#contact" },
+];
+
+// Local time (client only, refreshed every 30s)
+const time = ref("");
+let timer: ReturnType<typeof setInterval> | undefined;
+
+onMounted(() => {
+  const update = () => {
+    time.value = new Date().toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: site.value?.timezone,
+    });
+  };
+  update();
+  timer = setInterval(update, 30_000);
+});
+onBeforeUnmount(() => clearInterval(timer));
+
+// Close the mobile menu on navigation
+const route = useRoute();
+watch(() => route.fullPath, () => (isMenuOpen.value = false));
 </script>
 
 <template>
   <header
-    :class="
-      cn(
-        'text-white backdrop-blur-3xl bg-opacity-30 border-b border-gray-700 font-display fixed w-full top-0 z-50',
-      )
-    "
+    class="fixed top-0 inset-x-0 z-50 border-b border-gray-800/60 bg-gray-950/60 backdrop-blur-xl"
   >
     <div
-      :class="
-        cn(
-          'container mx-auto flex items-center justify-between py-4 px-4 lg:max-w-7xl',
-        )
-      "
+      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6"
     >
-      <button v-if="config">
-        <NuxtLink to="/" :class="cn('text-2xl font-bold')">
-          {{ config.title }}
-        </NuxtLink>
-      </button>
+      <!-- Identity -->
+      <NuxtLink
+        to="/"
+        class="font-display text-xl font-bold text-white tracking-tight"
+      >
+        {{ site?.name }}
+      </NuxtLink>
 
-      <div :class="cn('flex items-center gap-16')">
-        <nav
-          :class="
-            cn(
-              isMenuOpen ? 'flex' : 'hidden',
-              'md:flex',
-              'absolute md:relative top-full left-0 w-full md:w-auto bg-black md:bg-transparent flex-col md:flex-row items-center gap-8 py-8 md:py-0 border-b border-gray-700 md:border-none',
-            )
-          "
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          class="text-sm text-gray-400 hover:text-white transition-colors"
         >
-          <ul
-            :class="cn('flex flex-col md:flex-row items-center gap-8 text-lg')"
-          >
-            <li
-              v-for="item in config?.navbuttons"
-              :key="item.link"
-              @click="isMenuOpen = false"
-            >
-              <NuxtLink
-                :to="item.link"
-                :class="cn('hover:text-gray-400 transition')"
-              >
-                {{ item.name }}
-              </NuxtLink>
-            </li>
-          </ul>
-        </nav>
+          {{ link.name }}
+        </NuxtLink>
 
-        <div :class="cn('items-center gap-4 mt-2')">
-          <!--Hidden (hidden for WORK IN PROGRESS) (flex)-->
-          <button
-            :class="cn('hidden   p-2 hover:bg-white/10 rounded-lg transition')"
-            @click="buttonTheme = !buttonTheme"
-          >
-            <Transition name="theme" mode="out-in">
-              <Icon
-                :size="22"
-                :name="buttonTheme ? 'lucide:sun' : 'lucide:moon'"
-                class="text-white"
-              />
-            </Transition>
-          </button>
+        <span
+          v-if="time"
+          class="pl-6 border-l border-gray-800 text-xs font-mono text-gray-500"
+        >
+          {{ site?.location }} · {{ time }}
+        </span>
+      </nav>
 
-          <button
-            @click="isMenuOpen = !isMenuOpen"
-            :class="cn('md:hidden p-2 text-white z-50')"
-          >
-            <span v-if="!isMenuOpen">
-              <Icon size="30" name="lucide:menu" class="text-white" />
-            </span>
-            <span v-else>
-              <Icon size="30" name="lucide:x" class="text-white" />
-            </span>
-          </button>
-        </div>
-      </div>
+      <!-- Mobile toggle -->
+      <button
+        class="md:hidden p-2 -mr-2 text-white"
+        :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
+        @click="isMenuOpen = !isMenuOpen"
+      >
+        <Icon :name="isMenuOpen ? 'lucide:x' : 'lucide:menu'" :size="26" />
+      </button>
     </div>
+
+    <!-- Mobile nav -->
+    <nav
+      v-if="isMenuOpen"
+      class="md:hidden border-t border-gray-800/60 px-4 py-6 flex flex-col gap-5"
+    >
+      <NuxtLink
+        v-for="(link, i) in links"
+        :key="link.to"
+        :to="link.to"
+        class="flex items-baseline gap-4 font-display text-3xl font-bold text-white"
+        @click="isMenuOpen = false"
+      >
+        <span class="text-xs font-mono text-gray-500">0{{ i + 1 }}</span>
+        {{ link.name }}
+      </NuxtLink>
+    </nav>
   </header>
 </template>
-
-<style scoped>
-.theme-enter-active,
-.theme-leave-active {
-  transition: all 0.3s ease;
-}
-
-.theme-enter-from {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
-}
-
-.theme-leave-to {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.5);
-}
-</style>

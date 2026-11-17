@@ -19,6 +19,7 @@
     "clsx": "^2.1.1",
     "front-matter": "^4.0.2",
     "js-yaml": "^4.1.1",
+    "marked": "^18.2.1",
     "nuxt": "^4.4.2",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.2.2",
