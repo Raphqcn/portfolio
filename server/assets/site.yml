@@ -10,7 +10,9 @@ intro: "I design and build fast web apps and tools, from the first idea to produ
 about: >
   I'm a full-stack developer who likes shipping things people actually use.
   I care about speed, clean interfaces and software that respects its users.
-  TODO: a few words about your background, what you're looking for, and what drives you.
+  I enjoy working across the whole stack, from data models and APIs to the
+  last detail of an interface, and I'm always looking for projects where
+  thoughtful engineering makes a real difference.
 
 stack:
   - { name: "TypeScript", icon: "simple-icons:typescript" }
@@ -22,7 +24,7 @@ stack:
 
 contact:
   title: "Let's build something."
-  email: "" # TODO: your public email address (the big contact link uses it)
+  email: ""
 
 socials:
   - { name: "GitHub", url: "https://github.com/Raphqcn", icon: "simple-icons:github" }
